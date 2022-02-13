@@ -1,0 +1,69 @@
+@import '../Variables.css';
+
+.header{
+    
+  position: fixed;
+  font-family: var(--main-font);
+  height: 10vh;
+  width: 100%;
+  padding-right: 5%;
+  padding-left: 2%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  
+  overflow: hidden;
+  background-color: var(--nav-background);
+    
+}
+
+.header .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   // max-width: 1240px;
+    margin: 0;
+    height: 100%;
+    padding: 0;
+  }
+
+.logo{
+    color: var(--color-white);
+    font-family: var(--font-main);
+    font-size: 2.3em;
+    font-weight: bold;
+    margin:0;
+    padding: 0;
+    margin-left: 100px;
+
+}
+
+.header ul{
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+    margin: 0;
+    padding:0;
+    margin-right: 100px;
+}
+
+.header li{
+    margin-left: 3rem;
+}
+
+.header a{
+    color: var(--navbar-link-color);
+    text-decoration: none;
+    font-size: 1.3rem;
+}
+
+.header a:hover,
+.header a:active {
+    color: var(--navbar-link-color-hover);
+}
+
+
+
+button{
+   background: transparent;
+}

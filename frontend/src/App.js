@@ -1,8 +1,32 @@
-import './App.css';
+import React, { useState, useMemo } from 'react';
+import {Route, Routes } from 'react-router-dom';
 
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/account/LoginPage';
+import SignupPage from './pages/account/SignupPage';
+import PResetPage from './pages/account/PResetPage';
+import { UserContext } from './/UserContext';
 function App() {
+
+  const [user, setUser] = useState(null);
+  const providerValue = useMemo( ()=> ({user, setUser}), [user, setUser]);
   return (
-    <div className="App">
+    
+    <div>
+      
+      <UserContext.Provider value = {providerValue}>
+        <Routes>
+
+          <Route path='/' element={<HomePage/>}/>
+          
+          <Route path='/login' element={<LoginPage/>}/>
+
+          <Route path='/signup' element={<SignupPage/>}/>
+
+          <Route path='/password-reset' element={<PResetPage/>}/>
+
+        </Routes>
+      </UserContext.Provider>
     </div>
   );
 }

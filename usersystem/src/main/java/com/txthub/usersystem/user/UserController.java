@@ -64,8 +64,9 @@ public class UserController {
     }
 
     @PutMapping("/update/{game}/{winner}/{loser}")
+    @ResponseBody
     public boolean updateRating(@PathVariable String game, @PathVariable String winner, @PathVariable String loser){
-        return false;
+        return userService.updateRating(game, winner, loser);
     }
 
 

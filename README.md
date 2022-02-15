@@ -12,6 +12,6 @@
 usersystem = 8081\
 wordle = 8082\
 txtbasedadventure = 8083\
-anagram = 8084\
+anagram = 8084
 
 #info

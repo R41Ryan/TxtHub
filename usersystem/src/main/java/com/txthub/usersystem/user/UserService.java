@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static java.lang.Math.pow;
+
 @Service
 public class UserService {
 
@@ -71,6 +73,59 @@ public class UserService {
         return true;
     }
 
+    public boolean updateRating(String game, String winnerId, String loserId){
+        Optional<User> winner = userRepository.findById(winnerId);
+        Optional<User> loser = userRepository.findById(loserId);
+        if(winner.isEmpty() || loser.isEmpty()){
+            return false;
+        }
+
+
+        switch (game){
+            case "anagram":
+                changeAnagramRating(winner.get(), loser.get());
+                return true;
+            case "wordle":
+                changeWordleRating(winner.get(), loser.get());
+                return true;
+            case "tba":
+                changeTbaRating(winner.get(), loser.get());
+            default:
+                return false;
+        }
+    }
+
+    public void changeAnagramRating(User winner, User loser){
+
+        double change = calculateChange(winner.getAnagramRating(), loser.getAnagramRating());
+        winner.setAnagramRating(winner.getAnagramRating() + change);
+        userRepository.save(winner);
+        loser.setAnagramRating(loser.getAnagramRating() - change);
+        userRepository.save(loser);
+    }
+
+    public void changeWordleRating(User winner, User loser){
+        double change = calculateChange(winner.getWordleRating(), loser.getWordleRating());
+        winner.setWordleRating(winner.getWordleRating() + change);
+        userRepository.save(winner);
+        loser.setWordleRating(loser.getWordleRating() - change);
+        userRepository.save(loser);
+    }
+
+    public void changeTbaRating(User winner, User loser){
+        double change = calculateChange(winner.getTbaRating(), loser.getTbaRating());
+        winner.setTbaRating(winner.getTbaRating() + change);
+        userRepository.save(winner);
+        loser.setTbaRating(loser.getTbaRating() - change);
+        userRepository.save(loser);
+    }
+
+    public double calculateChange(double winnerRating, double loserRating){
+        double difference = loserRating - winnerRating;
+        double predictedOutcome = 1 / (1 + pow(10, (difference) / 400));
+        return 32 * (1 - predictedOutcome);
+
+    }
 
 
 

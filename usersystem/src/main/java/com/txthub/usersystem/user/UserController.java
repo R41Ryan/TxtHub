@@ -63,6 +63,10 @@ public class UserController {
         return userService.deleteAccount(userForm.getId());
     }
 
+    @PutMapping("/update/{game}/{winner}/{loser}")
+    public boolean updateRating(@PathVariable String game, @PathVariable String winner, @PathVariable String loser){
+        return false;
+    }
 
 
 

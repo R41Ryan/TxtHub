@@ -42,6 +42,37 @@ public class UserService {
         return null;
     }
 
+    public User changePassword(String id, String newPassword){
+        Optional<User> user = userRepository.findById(id);
+        if(user.isPresent()){
+            user.get().setPassword(newPassword);
+            userRepository.save(user.get());
+            return user.get();
+        }
+        return null;
+    }
+
+    public User changeUsername(String id, String newUsername){
+        Optional<User> user = userRepository.findById(id);
+        if(user.isPresent()){
+            user.get().setUsername(newUsername);
+            userRepository.save(user.get());
+            return user.get();
+        }
+        return null;
+    }
+
+    public boolean deleteAccount(String id){
+        try {
+            userRepository.deleteById(id);
+        }catch (IllegalArgumentException e){
+            return false;
+        }
+        return true;
+    }
+
+
+
 
 
 }

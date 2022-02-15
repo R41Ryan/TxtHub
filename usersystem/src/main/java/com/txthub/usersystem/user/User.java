@@ -12,9 +12,9 @@ public class User {
     private String id;
     private String username;
     private String password;
-    private float anagramRating;
-    private float wordleRating;
-    private float tbaRating; // tba = txtbased advanture
+    private double anagramRating;
+    private double wordleRating;
+    private double tbaRating; // tba = txtbased advanture
 
     //create new user
     public User(String username, String password){
@@ -28,7 +28,7 @@ public class User {
 
     }
 
-    public User(ObjectId id, String username, String password, float anagramRating, float wordleRating, float tbaRating) {
+    public User(ObjectId id, String username, String password, double anagramRating, double wordleRating, double tbaRating) {
         this.id = id.toString();
         this.username = username;
         this.password = password;

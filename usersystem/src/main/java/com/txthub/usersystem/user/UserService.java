@@ -20,38 +20,28 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User createUser(String username, String password){
-        if(getUserByUsername(username).isEmpty()) {
+    public Boolean createUser(String username, String password){
+        List<User> user = userRepository.findByUsername(username);
+        if(user.isEmpty()){
             System.out.println("user not found, creating a user");
-            User user = new User(new ObjectId(), username, password);
-            userRepository.save(user);
-            return user;
+            User newUser = new User(username, password);
+            userRepository.save(newUser);
+            return true;
         }
         System.out.println("user found");
 
-        return null;
+        return false;
 
     }
 
     public User login(String username, String password){
-        Optional<User> userOptional = getUserByUsername(username);
-        if(userOptional.isPresent()){
-            User user = userOptional.get();
-            if(user.getPassword().equals(password)){
-                return user;
-            }
+        List<User> userList = userRepository.findByUsernameAndPassword(username,password);
+        if(!userList.isEmpty()) {
+            return userList.get(0);
         }
         return null;
     }
 
-
-    public Optional<User> getUserByUsername(String username){
-        System.out.println(username);
-        return Optional.ofNullable(userRepository.findByUsername(username));
-
-
-
-    }
 
 
 }

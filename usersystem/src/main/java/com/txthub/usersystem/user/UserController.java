@@ -19,9 +19,9 @@ public class UserController {
 
     @GetMapping("/test")
     @ResponseBody
-    public String test(){
+    public boolean test(){
         System.out.println("Testing system");
-        return "hello world!";
+        return true;
     }
 
 
@@ -35,9 +35,12 @@ public class UserController {
 
     @PostMapping("/register")
     @ResponseBody
-    public User register(@RequestBody UserForm userForm){
+    public boolean register(@RequestBody UserForm userForm){
         System.out.println("Create request received");
-        return userService.createUser(userForm.getUsername(), userForm.getPassword());
+        return userService.createUser(userForm.getUsername(), userForm.getPassword()) != null;
     }
+
+
+
 
 }

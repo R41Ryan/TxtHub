@@ -17,8 +17,8 @@ public class User {
     private float tbaRating; // tba = txtbased advanture
 
     //create new user
-    User(ObjectId id, String username, String password){
-        this.id = id.toString();
+    public User(String username, String password){
+        this.id = new ObjectId().toString();
         this.username = username;
         this.password = password;
         //default rating is 1000
@@ -28,5 +28,15 @@ public class User {
 
     }
 
+    public User(ObjectId id, String username, String password, float anagramRating, float wordleRating, float tbaRating) {
+        this.id = id.toString();
+        this.username = username;
+        this.password = password;
+        this.anagramRating = anagramRating;
+        this.wordleRating = wordleRating;
+        this.tbaRating = tbaRating;
+    }
+    public User(){
 
+    }
 }

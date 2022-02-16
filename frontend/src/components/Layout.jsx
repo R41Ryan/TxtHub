@@ -43,10 +43,10 @@ const Layout = () => {
                             <Link to ='/'>Games</Link>
                         </li>
                         <li className ='nav-item'>
-                            <Link to ='/signup'>Scores</Link>
+                            <Link to ='/scores'>Scores</Link>
                         </li>
                         <li className ='nav-item'>
-                            <Link to ='/login'>Logout</Link>
+                            <Link to ='/'>Logout</Link>
                         </li>
                     </ul>
     

@@ -58,7 +58,7 @@ function LoginPage(){
             //query data base and if user is exists log in if password and email matches
             //set user to the user found in database
             //const user = await login();
-            setUser(user);
+            setUser("jim");
             navigate('/profile');
             
         }catch(err){

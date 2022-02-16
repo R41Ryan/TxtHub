@@ -1,30 +1,61 @@
 import React from 'react';
 import {Link } from 'react-router-dom';
+
 import './Layout.scss';
+
+import {UserContext} from '../UserContext';
 import logo from '../images/logo.svg';
-function Layout(){
-    return(
+const Layout = () => {
+    const [user, setUser] = useContext(UserContext);
 
-        <div className='header'>
-            <nav className='navbar'>
-                <img  className = 'logo'/>
-                
-                <ul >
-                    <li className ='nav-item'>
-                        <Link to ='/'>Games</Link>
-                    </li>
-                    <li className ='nav-item'>
-                        <Link to ='/signup'>Sign up</Link>
-                    </li>
-                    <li className ='nav-item'>
-                        <Link to ='/login'>Login</Link>
-                    </li>
-                </ul>
+    if(!user){
+        return(
 
-            </nav>
-           
-        </div>
-    )
+            <div className='header'>
+                <nav className='navbar'>
+                    <img  className = 'logo'/>
+                    
+                    <ul >
+                        <li className ='nav-item'>
+                            <Link to ='/'>Games</Link>
+                        </li>
+                        <li className ='nav-item'>
+                            <Link to ='/signup'>Sign up</Link>
+                        </li>
+                        <li className ='nav-item'>
+                            <Link to ='/login'>Login</Link>
+                        </li>
+                    </ul>
+    
+                </nav>
+               
+            </div>
+        )
+    }else{
+        return(
+
+            <div className='header'>
+                <nav className='navbar'>
+                    <img  className = 'logo'/>
+                    
+                    <ul >
+                        <li className ='nav-item'>
+                            <Link to ='/'>Games</Link>
+                        </li>
+                        <li className ='nav-item'>
+                            <Link to ='/signup'>Scores</Link>
+                        </li>
+                        <li className ='nav-item'>
+                            <Link to ='/login'>Logout</Link>
+                        </li>
+                    </ul>
+    
+                </nav>
+               
+            </div>
+        )
+    }
+    
 
 }
 

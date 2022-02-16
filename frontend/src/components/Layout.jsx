@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useContext} from 'react';
 import {Link } from 'react-router-dom';
 
 import './Layout.scss';
@@ -6,7 +6,7 @@ import './Layout.scss';
 import {UserContext} from '../UserContext';
 import logo from '../images/logo.svg';
 const Layout = () => {
-    const [user, setUser] = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
 
     if(!user){
         return(

@@ -13,11 +13,21 @@ function Wordle(){
         alert(words[guessPosition] +  ' guessPosition: ' + guessPosition);
     }
        
-
+    function createSquares() {
+        const gameBoard = document.getElementById("board");
+    
+        for (let index = 0; index < 30; index++) {
+          let square = document.createElement("div");
+          square.classList.add("square");
+          square.classList.add("animate__animated");
+          square.setAttribute("id", index + 1);
+          gameBoard.appendChild(square);
+        }
+    }
    
     return(
         <div>
-            <h1 className="game-name">Wordle</h1>
+            <h1 className="game-name" onClick={createSquares}>Wordle</h1>
 
             {/*Real version creates game tiles and game rows to import and create this */}
             <ul className="guesses">

@@ -29,16 +29,9 @@ function Wordle(){
         <div>
             <h1 className="game-name" onClick={createSquares}>Wordle</h1>
 
-            {/*Real version creates game tiles and game rows to import and create this */}
-            <ul className="guesses">
-            {words.map(function(words){
-                        return <li className='letter'>
-                            
-                            
-                        </li>;
-                           
-                    })}
-            </ul>
+            <div id='board-container'>
+                <div id='board'/>
+            </div>
             
             <div id="keyboard">
 

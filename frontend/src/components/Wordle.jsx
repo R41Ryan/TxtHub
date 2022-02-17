@@ -4,25 +4,27 @@ import {FaBackspace} from 'react-icons/fa';
 function Wordle(){
 
     var words = new Array(30).fill(0);
-    var guessPosition = 0; 
-
-    function addLetter(a)
-    {
-        guessPosition++; 
-        words[guessPosition] = a; 
-        alert(words[guessPosition] +  ' guessPosition: ' + guessPosition);
-    }
+    var guessPosition = 1; 
+    let square = document.createElement("div")
        
     function createSquares() {
         const gameBoard = document.getElementById("board");
     
         for (let index = 0; index < 30; index++) {
-          let square = document.createElement("div");
+          square = document.createElement("div");
+          
           square.classList.add("square");
           square.classList.add("animate__animated");
           square.setAttribute("id", index + 1);
           gameBoard.appendChild(square);
         }
+    }
+
+    function addLetter(a)
+    {
+        words[guessPosition] = a;
+        alert(words[guessPosition] +  ' guessPosition: ' + guessPosition);
+        guessPosition++; 
     }
    
     return(

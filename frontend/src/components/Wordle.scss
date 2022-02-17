@@ -3,7 +3,37 @@
     text-align:center;
 }
 
- .geusses {
+#board-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.square {
+  border: 2px solid rgb(58, 58, 60);
+  min-width: 60px;
+  min-height: 60px;
+  font-size: 50px;
+  font-weight: bold;
+  color: gainsboro;
+  text-transform: uppercase;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ /*}.geusses {
     
     width: 8.5cm;
     margin-left: calc(50% - 4.25cm);
@@ -21,7 +51,7 @@
     margin-bottom: 5%;
     border: 2px solid rgb(117, 117, 117);
 
-}
+}*/
 
 //Below is the Keyboard Styling
 

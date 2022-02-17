@@ -5,22 +5,25 @@ function Wordle(){
 
     var words = new Array(30).fill(0);
        
-
+    function createSquares() {
+        const gameBoard = document.getElementById("board");
+    
+        for (let index = 0; index < 30; index++) {
+          let square = document.createElement("div");
+          square.classList.add("square");
+          square.classList.add("animate__animated");
+          square.setAttribute("id", index + 1);
+          gameBoard.appendChild(square);
+        }
+    }
    
     return(
         <div>
-            <h1 className="game-name">Wordle</h1>
+            <h1 className="game-name" onClick={createSquares}>Wordle</h1>
 
-            {/*Real version creates game tiles and game rows to import and create this */}
-            <ul className="geusses">
-            {words.map(function(words){
-                        return <li className='letter'>
-                            
-                            
-                        </li>;
-                           
-                    })}
-            </ul>
+            <div id='board-container'>
+                <div id='board'></div>
+            </div>
             
             <div id="keyboard">
 
@@ -60,7 +63,7 @@ function Wordle(){
                     <button data-key='b'>b</button>
                     <button data-key='n'>n</button>
                     <button data-key='m'>m</button>
-                    <button data-key='←' className='one-and-a-half'><FaBackspace size={20} /></button>
+                    <button data-key='bs' className='one-and-a-half'><FaBackspace size={20} /></button>
                 </div>
             </div>
                 

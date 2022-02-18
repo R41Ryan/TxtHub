@@ -1,6 +1,7 @@
 import './Wordle.scss';
 import React from 'react';
 import {FaBackspace} from 'react-icons/fa';
+import axios from "axios";
 
 
 
@@ -18,6 +19,8 @@ window.addEventListener('load', (event) => {
         gameBoard.appendChild(square);
     }
 }, {once: true});
+
+
 
 /*function(){
     const gameBoard = document.getElementById("board");
@@ -54,7 +57,14 @@ function Wordle(){
     var guessPosition = 0; 
     
     //answer should be set to a word from the word list
-    const answer = "ready";
+
+    let answer;
+    axios.get('http://localhost:8082/wordle/api/v1/getword')
+        .then(res => {
+            answer = res.data
+            console.log(res.data)
+        });
+    console.log(answer)
 
     
 
@@ -87,6 +97,21 @@ function Wordle(){
     function addWord(){
 
         //Make function to check that the word is a real word
+
+        let request = 'http://localhost:8082/wordle/api/v1/testword/' + currentWord.join("")
+        let test
+        console.log(request)
+        axios.get(request)
+            .then(res => {
+                test = res.data
+                console.log(test)
+            })
+        console.log(test)
+        if(test === false){
+            console.log("hello")
+            return;
+        }
+
 
         if(currentWord.length < 5){
             //Give an error

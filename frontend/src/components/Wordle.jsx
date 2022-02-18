@@ -4,8 +4,10 @@ import {FaBackspace} from 'react-icons/fa';
 function Wordle(){
 
     var currentWord = [];
-    var geussedWords = [];
+    var guessedWords = [];
     var guessPosition = 0; 
+    const word = "whore";
+
     let square = document.createElement("div")
        
     function createSquares() {
@@ -35,6 +37,9 @@ function Wordle(){
     }
 
     function removeLetter(){
+        if(guessPosition <= guessedWords.length * 5){
+            return;
+        }
         if (guessPosition > 0){
             guessPosition--;
         }
@@ -42,7 +47,13 @@ function Wordle(){
         currentWord.pop(); 
         const box = document.getElementById(guessPosition);
         box.textContent = b;
-    } 
+    }
+
+    function addWord(){
+
+        guessedWords.push(currentWord);
+        currentWord = [];
+    }
    
     return(
         <div>
@@ -82,7 +93,7 @@ function Wordle(){
                 </div>
                 
                 <div className='row'>
-                    <button onClick= { () => addLetter('enter') } data-key='enter' className='one-and-a-half'>enter</button>
+                    <button onClick= { () => addWord() } data-key='enter' className='one-and-a-half'>enter</button>
                     <button onClick= { () => addLetter('z') } data-key='z'>z</button>
                     <button onClick= { () => addLetter('x') } data-key='x'>x</button>
                     <button onClick= { () => addLetter('c') } data-key='c'>c</button>

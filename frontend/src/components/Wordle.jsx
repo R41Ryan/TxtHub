@@ -33,6 +33,16 @@ function Wordle(){
         guessPosition++; 
 
     }
+
+    function removeLetter(){
+        if (guessPosition > 0){
+            guessPosition--;
+        }
+        let b = '';
+        currentWord.pop(); 
+        const box = document.getElementById(guessPosition);
+        box.textContent = b;
+    } 
    
     return(
         <div>
@@ -80,7 +90,7 @@ function Wordle(){
                     <button onClick= { () => addLetter('b') } data-key='b'>b</button>
                     <button onClick= { () => addLetter('n') } data-key='n'>n</button>
                     <button onClick= { () => addLetter('m') } data-key='m'>m</button>
-                    <button onClick= { () => removeLetter() } data-key='←' className='one-and-a-half'><FaBackspace size={20} /></button>
+                    <button onClick= { () => removeLetter() } data-key='backspace' className='one-and-a-half'><FaBackspace size={20} /></button>
                 </div>
             </div>
                 

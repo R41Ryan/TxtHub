@@ -1,11 +1,13 @@
 import './Wordle.scss';
 import React from 'react';
-import {FaBackspace, FaGreaterThanEqual} from 'react-icons/fa';
+import {FaBackspace} from 'react-icons/fa';
 function Wordle(){
 
     var currentWord = [];
     var guessedWords = [];
     var guessPosition = 0; 
+    
+    //answer should be set to a word from the word list
     const answer = "ready";
 
     let square = document.createElement("div")

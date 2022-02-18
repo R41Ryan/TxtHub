@@ -3,8 +3,8 @@ import React from 'react';
 import {FaBackspace} from 'react-icons/fa';
 function Wordle(){
 
-    var words = new Array(30).fill(0);
-    var guessPosition = 1; 
+    var currentWord = [];
+    var guessPosition = 0; 
     let square = document.createElement("div")
        
     function createSquares() {
@@ -15,15 +15,17 @@ function Wordle(){
           
           square.classList.add("square");
           square.classList.add("animate__animated");
-          square.setAttribute("id", index + 1);
+          square.setAttribute("id", index);
           gameBoard.appendChild(square);
         }
     }
 
     function addLetter(a)
-    {
-        words[guessPosition] = a;
-        alert(words[guessPosition] +  ' guessPosition: ' + guessPosition);
+    {   
+        
+        currentWord.push(a);
+        const box = document.getElementById(guessPosition);
+        box.textContent = a;
         guessPosition++; 
     }
    

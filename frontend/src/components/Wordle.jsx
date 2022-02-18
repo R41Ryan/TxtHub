@@ -1,12 +1,12 @@
 import './Wordle.scss';
 import React from 'react';
-import {FaBackspace} from 'react-icons/fa';
+import {FaBackspace, FaGreaterThanEqual} from 'react-icons/fa';
 function Wordle(){
 
     var currentWord = [];
     var guessedWords = [];
     var guessPosition = 0; 
-    const word = "whore";
+    const answer = "ready";
 
     let square = document.createElement("div")
        
@@ -51,6 +51,78 @@ function Wordle(){
 
     function addWord(){
 
+        //Make function to check that the word is a real word
+
+        if(currentWord.length < 5){
+            //Give an error
+            return;
+        }
+        const map = new Map();
+        const duplicates = [];
+        var str ="";
+
+        for(let i = 0; i < currentWord.length; i++){
+            str+= currentWord[i];
+            if(currentWord[i] === answer.charAt(i)){
+                if(map.get(currentWord[i]) !== undefined){
+                    duplicates.push(currentWord.indexOf(str.charAt(str.length -1)));
+                }
+                map.set(answer.charAt(i), 'g');
+            }else{
+                if(map.get(currentWord[i]) === undefined){
+                    map.set(currentWord[i], 'x');
+                }else{
+                    duplicates.push(i);
+                }
+                
+            }
+           
+        }
+
+        for(let i = 0; i < answer.length; i++){
+            if(map.get(answer.charAt(i)) !== undefined && map.get(answer.charAt(i)) !== 'g'){
+                map.set(answer.charAt(i), 'y');
+            }
+        }
+
+        for(let  i =0; i < currentWord.length; i++){
+            
+            const box = document.getElementById(guessPosition - 5 + i);
+            const letter = document.getElementById(currentWord[i]);
+
+            var char = currentWord[i];
+
+            if(map.get(char) === 'g'){
+                box.style.backgroundColor = 'lightgreen';
+                letter.style.backgroundColor = 'lightgreen';
+            }else if(map.get(char) === 'y'){
+                box.style.backgroundColor = 'yellow';
+
+                if(letter.style.backgroundColor !== 'lightgreen'){
+                    letter.style.backgroundColor = 'yellow';
+                }
+                
+            }else{
+                box.style.backgroundColor = 'grey';
+                letter.style.backgroundColor = 'grey';
+            }
+        }
+        for(let i = 0; i < duplicates.length; i++){
+            const box = document.getElementById(guessPosition - 5 + duplicates[i]);
+            
+
+            if(answer.split(currentWord[duplicates[i]]).length-1 > 1){
+                console.log('yo')
+                if(currentWord[duplicates[i]] === answer.charAt(duplicates[i])){
+                    box.style.backgroundColor = 'lightgreen';
+                }else{
+                    box.style.backgroundColor = 'yellow';
+                }
+            }else{
+                box.style.backgroundColor = 'grey';
+            }
+            
+        }
         guessedWords.push(currentWord);
         currentWord = [];
     }
@@ -66,41 +138,41 @@ function Wordle(){
             <div id="keyboard">
 
                 <div className='row'>
-                    <button onClick= { () => addLetter('q') } data-key='q'>q</button>
-                    <button onClick= { () => addLetter('w') }data-key='w'>w</button>
-                    <button onClick= { () => addLetter('e') }data-key='e'>e</button>
-                    <button onClick= { () => addLetter('r') }data-key='r'>r</button>
-                    <button onClick= { () => addLetter('t') }data-key='t'>t</button>
-                    <button onClick= { () => addLetter('y') }data-key='y'>y</button>
-                    <button onClick= { () => addLetter('u') }data-key='u'>u</button>
-                    <button onClick= { () => addLetter('i') }data-key='i'>i</button>
-                    <button onClick= { () => addLetter('o') }data-key='o'>o</button>
-                    <button onClick= { () => addLetter('p') }data-key='p'>p</button>
+                    <button onClick= { () => addLetter('q') }data-key='q' id='q'>q</button>
+                    <button onClick= { () => addLetter('w') }data-key='w' id='w'>w</button>
+                    <button onClick= { () => addLetter('e') }data-key='e' id='e'>e</button>
+                    <button onClick= { () => addLetter('r') }data-key='r' id='r'>r</button>
+                    <button onClick= { () => addLetter('t') }data-key='t' id='t'>t</button>
+                    <button onClick= { () => addLetter('y') }data-key='y' id='y'>y</button>
+                    <button onClick= { () => addLetter('u') }data-key='u' id='u'>u</button>
+                    <button onClick= { () => addLetter('i') }data-key='i' id='i'>i</button>
+                    <button onClick= { () => addLetter('o') }data-key='o' id='o'>o</button>
+                    <button onClick= { () => addLetter('p') }data-key='p' id='p'>p</button>
 
                 </div>
                 
                 <div className='row'>
-                    <button onClick= { () => addLetter('a') } data-key='a'>a</button>
-                    <button onClick= { () => addLetter('s') } data-key='s'>s</button>
-                    <button onClick= { () => addLetter('d') } data-key='d'>d</button>
-                    <button onClick= { () => addLetter('f') } data-key='f'>f</button>
-                    <button onClick= { () => addLetter('g') } data-key='g'>g</button>
-                    <button onClick= { () => addLetter('h') } data-key='h'>h</button>
-                    <button onClick= { () => addLetter('j') } data-key='j'>j</button>
-                    <button onClick= { () => addLetter('k') } data-key='k'>k</button>
-                    <button onClick= { () => addLetter('l') } data-key='l'>l</button>
+                    <button onClick= { () => addLetter('a') } data-key='a' id='a'>a</button>
+                    <button onClick= { () => addLetter('s') } data-key='s' id='s'>s</button>
+                    <button onClick= { () => addLetter('d') } data-key='d' id='d'>d</button>
+                    <button onClick= { () => addLetter('f') } data-key='f' id='f'>f</button>
+                    <button onClick= { () => addLetter('g') } data-key='g' id='g'>g</button>
+                    <button onClick= { () => addLetter('h') } data-key='h' id='h'>h</button>
+                    <button onClick= { () => addLetter('j') } data-key='j' id='j'>j</button>
+                    <button onClick= { () => addLetter('k') } data-key='k' id='k'>k</button>
+                    <button onClick= { () => addLetter('l') } data-key='l' id='l'>l</button>
                     
                 </div>
                 
                 <div className='row'>
                     <button onClick= { () => addWord() } data-key='enter' className='one-and-a-half'>enter</button>
-                    <button onClick= { () => addLetter('z') } data-key='z'>z</button>
-                    <button onClick= { () => addLetter('x') } data-key='x'>x</button>
-                    <button onClick= { () => addLetter('c') } data-key='c'>c</button>
-                    <button onClick= { () => addLetter('v') } data-key='v'>v</button>
-                    <button onClick= { () => addLetter('b') } data-key='b'>b</button>
-                    <button onClick= { () => addLetter('n') } data-key='n'>n</button>
-                    <button onClick= { () => addLetter('m') } data-key='m'>m</button>
+                    <button onClick= { () => addLetter('z') } data-key='z' id='z'>z</button>
+                    <button onClick= { () => addLetter('x') } data-key='x' id='x'>x</button>
+                    <button onClick= { () => addLetter('c') } data-key='c' id='c'>c</button>
+                    <button onClick= { () => addLetter('v') } data-key='v' id='v'>v</button>
+                    <button onClick= { () => addLetter('b') } data-key='b' id='b'>b</button>
+                    <button onClick= { () => addLetter('n') } data-key='n' id='n'>n</button>
+                    <button onClick= { () => addLetter('m') } data-key='m' id='m'>m</button>
                     <button onClick= { () => removeLetter() } data-key='backspace' className='one-and-a-half'><FaBackspace size={20} /></button>
                 </div>
             </div>

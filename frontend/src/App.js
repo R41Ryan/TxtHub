@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/account/LoginPage';
 import SignupPage from './pages/account/SignupPage';
 import PResetPage from './pages/account/PResetPage';
+import Wordle from './components/Wordle';
 import { UserContext } from './/UserContext';
 function App() {
 
@@ -27,6 +28,8 @@ function App() {
           <Route path='/password-reset' element={<PResetPage/>}/>
 
           <Route path='/profile' element={<ProfilePage/>}/>
+
+          <Route path='/wordle' element={<Wordle/>}/>
 
         </Routes>
       </UserContext.Provider>

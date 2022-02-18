@@ -1,18 +1,39 @@
 import './Wordle.scss';
 import React from 'react';
 import {FaBackspace} from 'react-icons/fa';
-function Wordle(){
 
-    var currentWord = [];
-    var guessedWords = [];
-    var guessPosition = 0; 
+
+
+let square = document.createElement("div");
+
+window.addEventListener('load', (event) => {
+    const gameBoard = document.getElementById("board");
     
-    //answer should be set to a word from the word list
-    const answer = "ready";
+    for (let index = 0; index < 30; index++) {
+        square = document.createElement("div");
+          
+        square.classList.add("square");
+        square.classList.add("animate__animated");
+        square.setAttribute("id", index);
+        gameBoard.appendChild(square);
+    }
+}, {once: true});
 
-    let square = document.createElement("div")
-       
-    function createSquares() {
+/*function(){
+    const gameBoard = document.getElementById("board");
+    
+        for (let index = 0; index < 30; index++) {
+          square = document.createElement("div");
+          
+          square.classList.add("square");
+          square.classList.add("animate__animated");
+          square.setAttribute("id", index);
+          gameBoard.appendChild(square);
+        }
+}
+     
+export function createSquares(){
+        console.log("it's runnning the functions");
         const gameBoard = document.getElementById("board");
     
         for (let index = 0; index < 30; index++) {
@@ -23,7 +44,19 @@ function Wordle(){
           square.setAttribute("id", index);
           gameBoard.appendChild(square);
         }
-    }
+}
+*/
+
+function Wordle(){
+
+    var currentWord = [];
+    var guessedWords = [];
+    var guessPosition = 0; 
+    
+    //answer should be set to a word from the word list
+    const answer = "ready";
+
+    
 
     function addLetter(a)
     {   
@@ -131,7 +164,7 @@ function Wordle(){
    
     return(
         <div>
-            <h1 className="game-name" onClick={createSquares}>Wordle</h1>
+            <h1 className="game-name">Wordle</h1>
 
             <div id='board-container'>
                 <div id='board'/>

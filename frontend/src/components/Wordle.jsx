@@ -3,53 +3,6 @@ import React from 'react';
 import {FaBackspace} from 'react-icons/fa';
 import axios from "axios";
 
-
-
-let square = document.createElement("div");
-
-window.addEventListener('load', (event) => {
-    const gameBoard = document.getElementById("board");
-    
-    for (let index = 0; index < 30; index++) {
-        square = document.createElement("div");
-          
-        square.classList.add("square");
-        square.classList.add("animate__animated");
-        square.setAttribute("id", index);
-        gameBoard.appendChild(square);
-    }
-}, {once: true});
-
-
-
-/*function(){
-    const gameBoard = document.getElementById("board");
-    
-        for (let index = 0; index < 30; index++) {
-          square = document.createElement("div");
-          
-          square.classList.add("square");
-          square.classList.add("animate__animated");
-          square.setAttribute("id", index);
-          gameBoard.appendChild(square);
-        }
-}
-     
-export function createSquares(){
-        console.log("it's runnning the functions");
-        const gameBoard = document.getElementById("board");
-    
-        for (let index = 0; index < 30; index++) {
-          square = document.createElement("div");
-          
-          square.classList.add("square");
-          square.classList.add("animate__animated");
-          square.setAttribute("id", index);
-          gameBoard.appendChild(square);
-        }
-}
-*/
-
 function Wordle(){
 
     var currentWord = [];
@@ -57,14 +10,14 @@ function Wordle(){
     var guessPosition = 0; 
     
     //answer should be set to a word from the word list
-
-    let answer;
+    let answer = 'ready';
+    /*let answer;
     axios.get('http://localhost:8082/wordle/api/v1/getword')
         .then(res => {
             answer = res.data
             console.log(res.data)
         });
-    console.log(answer)
+    console.log(answer)*/
 
     
 
@@ -98,7 +51,7 @@ function Wordle(){
 
         //Make function to check that the word is a real word
 
-        let request = 'http://localhost:8082/wordle/api/v1/testword/' + currentWord.join("")
+        /*let request = 'http://localhost:8082/wordle/api/v1/testword/' + currentWord.join("")
         let test
         console.log(request)
         axios.get(request)
@@ -110,7 +63,7 @@ function Wordle(){
         if(test === false){
             console.log("hello")
             return;
-        }
+        }*/
 
 
         if(currentWord.length < 5){
@@ -172,7 +125,7 @@ function Wordle(){
             
 
             if(answer.split(currentWord[duplicates[i]]).length-1 > 1){
-                console.log('yo')
+               
                 if(currentWord[duplicates[i]] === answer.charAt(duplicates[i])){
                     box.style.backgroundColor = 'lightgreen';
                 }else{
@@ -186,13 +139,19 @@ function Wordle(){
         guessedWords.push(currentWord);
         currentWord = [];
     }
-   
+    
+    var arr = new Array(30).fill(null);
     return(
         <div>
             <h1 className="game-name">Wordle</h1>
 
             <div id='board-container'>
-                <div id='board'/>
+            <div id='board'> 
+                    {arr.map(function(arr, index){
+                        return <div class="square animate__animated" id={index}></div>
+                    })}
+                
+                </div>
             </div>
             
             <div id="keyboard">

@@ -1,13 +1,22 @@
 import './Wordle.scss';
-import React from 'react';
+import React, {useState} from 'react';
 import {FaBackspace} from 'react-icons/fa';
 import axios from "axios";
 
+
+var guessPosition = 0; 
+var currentWord = [];
+var guessedWords = [];
+
+
 function Wordle(){
 
-    var currentWord = [];
-    var guessedWords = [];
-    var guessPosition = 0; 
+    
+   
+    
+    const [notEnoughLetters, setNotEnoughLetters] = useState(false);
+    const [notWord, setNotWord] = useState(false);
+    
     
     //answer should be set to a word from the word list
     let answer = 'ready';
@@ -23,10 +32,12 @@ function Wordle(){
 
     function addLetter(a)
     {   
-        
+        setNotEnoughLetters(false);
+        setNotWord(false);
         if(currentWord.length > 4){
             return;
         }
+        
         currentWord.push(a);
         const box = document.getElementById(guessPosition);
         box.textContent = a;
@@ -35,6 +46,8 @@ function Wordle(){
     }
 
     function removeLetter(){
+        setNotEnoughLetters(false);
+        setNotWord(false);
         if(guessPosition <= guessedWords.length * 5){
             return;
         }
@@ -48,9 +61,11 @@ function Wordle(){
     }
 
     function addWord(){
-
+        setNotEnoughLetters(false);
+        setNotWord(false);
         //Make function to check that the word is a real word
-
+        //If entered letters arent a real word use nexxt line
+        //setNotWord(True);
         /*let request = 'http://localhost:8082/wordle/api/v1/testword/' + currentWord.join("")
         let test
         console.log(request)
@@ -65,11 +80,12 @@ function Wordle(){
             return;
         }*/
 
-
         if(currentWord.length < 5){
-            //Give an error
+      
+            setNotEnoughLetters(true);
             return;
         }
+       
         const map = new Map();
         const duplicates = [];
         var str ="";
@@ -144,6 +160,10 @@ function Wordle(){
     return(
         <div>
             <h1 className="game-name">Wordle</h1>
+            <hr/>
+
+            {notEnoughLetters && <h2 className="game-name" id='let'>Not enough letters.</h2>}
+            {notWord && <h2 className="game-name">Not in word lsit.</h2>}
 
             <div id='board-container'>
             <div id='board'> 

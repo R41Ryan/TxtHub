@@ -1,7 +1,9 @@
 .game-name{
-    margin-top: 12vh;
+    margin-top: 2vh;
+    
     text-align:center;
 }
+
 
 #board-container {
   display: flex;
@@ -9,6 +11,7 @@
   align-items: center;
   flex-grow: 1;
   overflow: hidden;
+  margin-top: 8vh;
 }
 
 #board {
@@ -45,8 +48,9 @@
     margin: 0 8px;
     user-select: none;
     width: 14.5cm;
-    margin-left: calc(50% - 7.25cm);
+    max-width: 90vw;
     margin-top: 40px;
+    margin: 3rem auto;
   }
   
   .row {
@@ -106,5 +110,16 @@
     flex: 2;
   }
 
+@media screen and (max-height: 750px){
+  .square {
+    min-width: 50px;
+    min-height: 50px;
+    font-size: 35px;
+   
+  }
 
-  
+  #keyboard {
+    margin-top: 10px;
+    
+  }
+}

@@ -1,13 +1,16 @@
 import './Wordle.scss';
 import React, {useState} from 'react';
-import {FaBackspace} from 'react-icons/fa';
+import {FaBackspace, FaRedo} from 'react-icons/fa';
+import {AiFillPlaySquare} from 'react-icons/ai';
 import axios from "axios";
+
+import Message from './Message';
 
 
 var guessPosition = 0; 
 var currentWord = [];
 var guessedWords = [];
-
+var answer = 'ready'; // just declare answer don't set it to anything tho
 
 function Wordle(){
 
@@ -16,22 +19,35 @@ function Wordle(){
     
     const [notEnoughLetters, setNotEnoughLetters] = useState(false);
     const [notWord, setNotWord] = useState(false);
-    
-    
+    const [finishedSuccessfully, setFinishedSuccessfully] = useState(false);
+    const [finishedWrong, setFinishedWrong] = useState(false);
+    const [instructions, setInstructions] = useState(true);
     //answer should be set to a word from the word list
-    let answer = 'ready';
-    /*let answer;
+   //Need to declare 'answer' outside of the Wordle Function
+
+    
+    /*
     axios.get('http://localhost:8082/wordle/api/v1/getword')
         .then(res => {
             answer = res.data
             console.log(res.data)
         });
     console.log(answer)*/
-
+    function setWord(){
+        axios.get('http://localhost:8082/wordle/api/v1/getword')
+        .then(res => {
+            answer = res.data
+            console.log(res.data)
+        });
+        console.log(answer)
+    }
     
 
     function addLetter(a)
     {   
+        if(finishedSuccessfully || finishedWrong){
+            return;
+        }
         setNotEnoughLetters(false);
         setNotWord(false);
         if(currentWord.length > 4){
@@ -42,6 +58,7 @@ function Wordle(){
         const box = document.getElementById(guessPosition);
         box.textContent = a;
         guessPosition++; 
+
 
     }
 
@@ -63,6 +80,8 @@ function Wordle(){
     function addWord(){
         setNotEnoughLetters(false);
         setNotWord(false);
+        
+        
         //Make function to check that the word is a real word
         //If entered letters arent a real word use nexxt line
         //setNotWord(True);
@@ -153,7 +172,44 @@ function Wordle(){
             
         }
         guessedWords.push(currentWord);
+  
+        if(currentWord.join('') === answer){
+            setFinishedSuccessfully(true);
+            
+        }else if(guessedWords.length === 6){
+            setFinishedWrong(true);
+        }
         currentWord = [];
+    }
+
+    function playAgain(){
+
+        for(let i = 0; i < guessedWords.length; i++){
+            var p = guessedWords[i];
+            for(let j = 0; j < p.length; j++){
+                const l = document.getElementById(p[j]);
+                l.style.backgroundColor = '#d3d6da';
+            }
+        }
+        
+
+        while(guessPosition > -1){
+            let b = ''; 
+            const box = document.getElementById(guessPosition);
+            box.textContent = b;
+            box.style.backgroundColor = 'white';
+            guessPosition--;
+        }
+        guessPosition = 0;
+        guessedWords = [];
+        setFinishedSuccessfully(false);
+        setFinishedWrong(false);    
+        setNotEnoughLetters(false);
+        setNotWord(false);
+        
+        //Should just call the function to set answer
+        //setWord();
+        answer = 'hello';
     }
     
     var arr = new Array(30).fill(null);
@@ -162,8 +218,12 @@ function Wordle(){
             <h1 className="game-name">Wordle</h1>
             <hr/>
 
-            {notEnoughLetters && <h2 className="game-name" id='let'>Not enough letters.</h2>}
-            {notWord && <h2 className="game-name">Not in word lsit.</h2>}
+            
+            {notEnoughLetters && <Message title='Not long enough.'/>}
+            {notWord && <Message title = 'Not in word list.'/>}
+            {finishedSuccessfully && <Message title= 'Good Job!' again='Play again?'  handler={playAgain} button={<FaRedo size = {20}/> }/>}
+            {finishedWrong && <Message title= 'Nice Try :(' again='Play again?' handler={playAgain} button={<FaRedo size = {20}/> }/>}
+            {/*{instructions && <Message title='Insructions' instr='' handler={playAgain}/>} // Maybe make a new card for instructions */}
 
             <div id='board-container'>
             <div id='board'> 

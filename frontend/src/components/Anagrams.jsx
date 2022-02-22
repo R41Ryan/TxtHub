@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {FaBackspace, FaRedo} from 'react-icons/fa';
 import {AiFillPlaySquare} from 'react-icons/ai';
 import axios from "axios";
-import Wordle from './Wordle';
+
 
 
 var letterList = ['r', 'a', 't', 'e', 's'];

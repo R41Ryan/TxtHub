@@ -1,5 +1,6 @@
 import './Wordle.scss';
 import React, {useState} from 'react';
+import Layout from '../Layout';
 import {FaBackspace, FaRedo} from 'react-icons/fa';
 import {GiCancel} from 'react-icons/gi';
 import {AiOutlineQuestionCircle} from 'react-icons/ai';
@@ -204,8 +205,10 @@ function Wordle(){
     var arr = new Array(30).fill(null);
     return(
         <div>
+            
             <h1 className="game-name">Wordle <AiOutlineQuestionCircle className='help' onClick = {changeInstructions}/></h1>
             <hr/>
+            
 
             {notEnoughLetters && <Message title='Not long enough.'/>}
             {notWord && <Message title = 'Not in word list.'/>}

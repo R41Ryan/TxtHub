@@ -7,6 +7,7 @@ import LoginPage from './pages/account/LoginPage';
 import SignupPage from './pages/account/SignupPage';
 import PResetPage from './pages/account/PResetPage';
 import Wordle from './components/wordle/Wordle';
+import Anagrams from './components/Anagrams';
 import { UserContext } from './/UserContext';
 function App() {
 
@@ -30,6 +31,8 @@ function App() {
           <Route path='/profile' element={<ProfilePage/>}/>
 
           <Route path='/wordle' element={<Wordle/>}/>
+
+          <Route path='/anagrams' elemetnt={<Anagrams/>}/>
 
         </Routes>
       </UserContext.Provider>

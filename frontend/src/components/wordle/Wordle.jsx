@@ -1,9 +1,11 @@
 import './Wordle.scss';
 import React, {useState} from 'react';
 import {FaBackspace, FaRedo} from 'react-icons/fa';
-import {AiFillPlaySquare} from 'react-icons/ai';
+
 import axios from "axios";
 
+import Instructions from './Instructions';
+import Backdrop from './Backdrop';
 import Message from './Message';
 
 
@@ -223,7 +225,7 @@ function Wordle(){
             {notWord && <Message title = 'Not in word list.'/>}
             {finishedSuccessfully && <Message title= 'Good Job!' again='Play again?'  handler={playAgain} button={<FaRedo size = {20}/> }/>}
             {finishedWrong && <Message title= 'Nice Try :(' again='Play again?' handler={playAgain} button={<FaRedo size = {20}/> }/>}
-            {/*{instructions && <Message title='Insructions' instr='' handler={playAgain}/>} // Maybe make a new card for instructions */}
+            
 
             <div id='board-container'>
             <div id='board'> 

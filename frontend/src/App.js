@@ -6,7 +6,7 @@ import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/account/LoginPage';
 import SignupPage from './pages/account/SignupPage';
 import PResetPage from './pages/account/PResetPage';
-import Wordle from './components/Wordle';
+import Wordle from './components/wordle/Wordle';
 import { UserContext } from './/UserContext';
 function App() {
 

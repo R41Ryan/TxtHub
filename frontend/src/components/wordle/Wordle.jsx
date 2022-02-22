@@ -1,6 +1,8 @@
 import './Wordle.scss';
 import React, {useState} from 'react';
 import {FaBackspace, FaRedo} from 'react-icons/fa';
+import {GiCancel} from 'react-icons/gi';
+import {AiOutlineQuestionCircle} from 'react-icons/ai';
 
 import axios from "axios";
 
@@ -25,22 +27,11 @@ async function setWord(){
 
 function Wordle(){
 
-    
-   
-    
     const [notEnoughLetters, setNotEnoughLetters] = useState(false);
     const [notWord, setNotWord] = useState(false);
     const [finishedSuccessfully, setFinishedSuccessfully] = useState(false);
     const [finishedWrong, setFinishedWrong] = useState(false);
     const [instructions, setInstructions] = useState(true);
-    //answer should be set to a word from the word list
-   //Need to declare 'answer' outside of the Wordle Function
-
-    
-
-
-
-    
 
     function addLetter(a)
     {   
@@ -82,10 +73,6 @@ function Wordle(){
         setNotEnoughLetters(false);
         setNotWord(false);
 
-
-        //Make function to check that the word is a real word
-        //If entered letters arent a real word use nexxt line
-        //setNotWord(True);
         if(currentWord.length < 5){
 
             setNotEnoughLetters(true);
@@ -99,7 +86,7 @@ function Wordle(){
             .then(res => {
                 console.log(res.data)
                 test =  res.data
-            })
+        })
         console.log(test)
         if(test === false){
             setNotWord(true);
@@ -210,22 +197,22 @@ function Wordle(){
         setNotEnoughLetters(false);
         setNotWord(false);
         
-        //Should just call the function to set answer
         setWord();
     }
     
+    const changeInstructions = () => setInstructions(!instructions);
     var arr = new Array(30).fill(null);
     return(
         <div>
-            <h1 className="game-name">Wordle</h1>
+            <h1 className="game-name">Wordle <AiOutlineQuestionCircle className='help' onClick = {changeInstructions}/></h1>
             <hr/>
 
-            
             {notEnoughLetters && <Message title='Not long enough.'/>}
             {notWord && <Message title = 'Not in word list.'/>}
             {finishedSuccessfully && <Message title= 'Good Job!' again='Play again?'  handler={playAgain} button={<FaRedo size = {20}/> }/>}
             {finishedWrong && <Message title= 'Nice Try :(' again='Play again?' handler={playAgain} button={<FaRedo size = {20}/> }/>}
-            
+            {instructions && <Instructions button={<GiCancel/>} handler={changeInstructions}/>}
+            {instructions && <Backdrop onCancel={changeInstructions}/>}
 
             <div id='board-container'>
             <div id='board'> 

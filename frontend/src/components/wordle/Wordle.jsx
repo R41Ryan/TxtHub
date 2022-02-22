@@ -12,7 +12,16 @@ import Message from './Message';
 var guessPosition = 0; 
 var currentWord = [];
 var guessedWords = [];
-var answer = 'ready'; // just declare answer don't set it to anything tho
+var answer = setWord(); // just declare answer don't set it to anything tho
+
+async function setWord(){
+    await axios.get('http://localhost:8082/wordle/api/v1/getword')
+        .then(res => {
+            answer = res.data
+            console.log(res.data)
+        });
+}
+
 
 function Wordle(){
 
@@ -28,21 +37,9 @@ function Wordle(){
    //Need to declare 'answer' outside of the Wordle Function
 
     
-    /*
-    axios.get('http://localhost:8082/wordle/api/v1/getword')
-        .then(res => {
-            answer = res.data
-            console.log(res.data)
-        });
-    console.log(answer)*/
-    function setWord(){
-        axios.get('http://localhost:8082/wordle/api/v1/getword')
-        .then(res => {
-            answer = res.data
-            console.log(res.data)
-        });
-        console.log(answer)
-    }
+
+
+
     
 
     function addLetter(a)
@@ -79,34 +76,38 @@ function Wordle(){
         box.textContent = b;
     }
 
-    function addWord(){
+
+
+    async function addWord(){
         setNotEnoughLetters(false);
         setNotWord(false);
-        
-        
+
+
         //Make function to check that the word is a real word
         //If entered letters arent a real word use nexxt line
         //setNotWord(True);
-        /*let request = 'http://localhost:8082/wordle/api/v1/testword/' + currentWord.join("")
-        let test
-        console.log(request)
-        axios.get(request)
-            .then(res => {
-                test = res.data
-                console.log(test)
-            })
-        console.log(test)
-        if(test === false){
-            console.log("hello")
-            return;
-        }*/
-
         if(currentWord.length < 5){
-      
+
             setNotEnoughLetters(true);
             return;
         }
-       
+
+        let test
+        let request = 'http://localhost:8082/wordle/api/v1/testword/' + currentWord.join("")
+        console.log(request)
+        await axios.get(request)
+            .then(res => {
+                console.log(res.data)
+                test =  res.data
+            })
+        console.log(test)
+        if(test === false){
+            setNotWord(true);
+            return;
+        }
+
+
+
         const map = new Map();
         const duplicates = [];
         var str ="";
@@ -124,9 +125,9 @@ function Wordle(){
                 }else{
                     duplicates.push(i);
                 }
-                
+
             }
-           
+
         }
 
         for(let i = 0; i < answer.length; i++){
@@ -136,7 +137,7 @@ function Wordle(){
         }
 
         for(let  i =0; i < currentWord.length; i++){
-            
+
             const box = document.getElementById(guessPosition - 5 + i);
             const letter = document.getElementById(currentWord[i]);
 
@@ -151,7 +152,7 @@ function Wordle(){
                 if(letter.style.backgroundColor !== 'lightgreen'){
                     letter.style.backgroundColor = 'yellow';
                 }
-                
+
             }else{
                 box.style.backgroundColor = 'grey';
                 letter.style.backgroundColor = 'grey';
@@ -159,10 +160,10 @@ function Wordle(){
         }
         for(let i = 0; i < duplicates.length; i++){
             const box = document.getElementById(guessPosition - 5 + duplicates[i]);
-            
+
 
             if(answer.split(currentWord[duplicates[i]]).length-1 > 1){
-               
+
                 if(currentWord[duplicates[i]] === answer.charAt(duplicates[i])){
                     box.style.backgroundColor = 'lightgreen';
                 }else{
@@ -171,13 +172,13 @@ function Wordle(){
             }else{
                 box.style.backgroundColor = 'grey';
             }
-            
+
         }
         guessedWords.push(currentWord);
-  
+
         if(currentWord.join('') === answer){
             setFinishedSuccessfully(true);
-            
+
         }else if(guessedWords.length === 6){
             setFinishedWrong(true);
         }
@@ -210,8 +211,7 @@ function Wordle(){
         setNotWord(false);
         
         //Should just call the function to set answer
-        //setWord();
-        answer = 'hello';
+        setWord();
     }
     
     var arr = new Array(30).fill(null);

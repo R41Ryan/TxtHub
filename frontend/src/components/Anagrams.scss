@@ -1,0 +1,212 @@
+.game-name{
+    margin-top: 2vh;
+    
+    text-align:center;
+    z-index: 11;
+}
+
+#top-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+    margin-top: 8vh;
+}
+
+.startButton{
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 10px;
+    
+    margin: 0 6px 0 0;
+
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #24c515;
+    color: #000000;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.3);
+}
+
+.timer{
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 50px;
+    margin: 0 6px 0 0;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #ffffff;
+    color: #0e0d0d;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.3);
+}
+
+//list of words guessed by the user
+
+#guessList-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+    margin-top: 8vh;
+}
+
+#guessList{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.wordBox {
+    background-color: #b1cff7;
+    min-width: 120px;
+    min-height: 40px;
+    font-size: 35px;
+    font-weight: bold;
+    color: black;
+    text-transform: uppercase;
+    
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+//users flexible guess box 
+
+#currentGuess-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+    margin-top: 8vh;
+}
+
+#currentGuess{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    padding: 10px;
+    width: 50%;
+}
+
+.letterSquare {
+    border: 2px solid rgb(58, 58, 60);
+    min-width: 60px;
+    min-height: 60px;
+    font-size: 50px;
+    font-weight: bold;
+    color: black;
+    text-transform: uppercase;
+    
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+//keyboard settings
+
+:host {
+    height: 200px;
+
+  }
+  #letterSet {
+    margin: 0 8px;
+    user-select: none;
+    width: 100%;
+    max-width: 90vw;
+    margin-top: 40px;
+    margin: 3rem auto;
+  }
+  
+  .letterSetRow {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 10px;
+    padding: 10px;
+    width: 50%;
+    margin: 0 auto 8px;
+    /* https://stackoverflow.com/questions/46167604/ios-html-disable-double-tap-to-zoom */
+    touch-action: manipulation;
+  }
+  
+  button_Anagrams {
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 50px;
+    border: 0;
+    margin: 0 6px 0 0;
+    height: 70px;
+    width: 70px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #d3d6da;
+    color: #000000;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.3);
+  }
+
+  button_Anagrams:focus {
+    outline: none;
+  }
+
+  button_Anagrams.fade {
+    transition: background-color 0.1s ease, color 0.1s ease;
+  }
+  
+  button_Anagrams:last-of-type {
+    margin: 0;
+  }
+  
+  .half_Anagrams {
+    flex: 0.5;
+  }
+  
+  .one_Anagrams {
+    flex: 1;
+  }
+
+  .one-and-a-half_Anagrams {
+    flex: 1.5;
+    font-size: 12px;
+  }
+  
+  .two_Anagrams {
+    flex: 2;
+  }
+
+@media screen and (max-height: 750px){
+  .square_Anagrams {
+    min-width: 50px;
+    min-height: 50px;
+    font-size: 35px;
+   
+  }
+
+  #letterSet {
+    margin-top: 10px;
+    
+  }
+}

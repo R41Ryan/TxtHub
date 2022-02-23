@@ -1,4 +1,4 @@
-package com.txthub.txtbasedadventure.node;
+package com.txthub.txtbasedadventure.story.node;
 
 import lombok.Data;
 import org.bson.types.ObjectId;
@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 public class Node {
     static int autoId = 1;
     @Id
-    private int nodeId;
+    private Integer nodeId;
     private String text; // Text displayed on node (i.e. the story/scenario)
     private String imagePath; // Path to image located on local server/host
 
